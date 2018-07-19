@@ -5,8 +5,23 @@ const app = new koa()
 const fs = require('fs')
 const routes = require('./routes')
 // 连接数据库
-const mongoose = require('./config/baseConfig')
-mongoose.connect()
+// const mongoose = require('./config/baseConfig')
+// mongoose.connect()
+const mongo = require('./mongo/mongo')
+const { Post } = require('./mongo')
+
+mongo.connect()
+var newPost = new Post({
+  title: 'hello',
+  author: 'can',
+  content: 'hello world!'
+})
+
+newPost.save().then(() => {
+  console.log('successfully saved!')
+}).catch(error => {
+  console.log(error)
+})
 
 const blog = require('./config/mongodb')
 // let test = new insertBolg({
