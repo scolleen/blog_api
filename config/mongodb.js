@@ -1,14 +1,8 @@
-const mongoose = require('./baseConfig')
-
-const accountSchema = mongoose.Schema({
-  accountName: {
-    type: String,
-    required: true
-  },
-  accountPwd: {
-    type: String,
-    required: true
-  }
+const mongoose = require('mongoose')
+const insertBolg = mongoose.Schema({
+  title: String,
+  author: String,
+  content: String
 })
 
-module.exports = mongoose.model('modelName', accountSchema, 'account')
+module.exports = mongoose.model('blog', insertBolg)
