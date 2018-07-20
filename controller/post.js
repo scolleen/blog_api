@@ -10,17 +10,22 @@ post.prototype.index = async function (ctx) {
     list: res
   }
 }
-// var createPost = new Post({
-//   title: 'hello',
-//   author: 'can',
-//   content: 'hello world!',
-//   type: 1,
-//   time: new Date()
-// })
-// createPost.save().then(() => {
-//   console.log('successfully saved!')
-// }).catch(error => {
-//   console.log(error)
-// })
+post.prototype.read = async function (ctx) {
+  let id = ctx.request.query.id
+  if (id) {
+    let res = await Post.findOne({_id: ctx.request.query.id})
+    ctx.body = {
+      code: 1,
+      payload: res
+    }
+  } else {
+    ctx.body = {
+      code: 0,
+      msg: 'ID不存在'
+    }
+  }
+}
 
+post.prototype.create = async function (ctx) {
+}
 module.exports = new post()

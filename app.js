@@ -24,6 +24,6 @@ const handler = async (ctx, next) => {
 // 路由
 // routes
 app.use(routes.routes(), routes.allowedMethods());
-app.use(bodyParser())
+app.use(bodyparser)
 // app.use(main)
 app.listen(3000)
