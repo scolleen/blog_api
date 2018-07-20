@@ -1,40 +1,13 @@
 const koa = require('koa')
-// const path = require('path')
+const bodyparser = require('koa-bodyparser')
 // const resource = require('koa-static')
 const app = new koa()
 const fs = require('fs')
 const routes = require('./routes')
 // 连接数据库
-// const mongoose = require('./config/baseConfig')
-// mongoose.connect()
-const mongo = require('./mongo/mongo')
-const { Post } = require('./mongo')
+const mongoose = require('./config/baseConfig')
+mongoose.connect()
 
-mongo.connect()
-var newPost = new Post({
-  title: 'hello',
-  author: 'can',
-  content: 'hello world!'
-})
-
-newPost.save().then(() => {
-  console.log('successfully saved!')
-}).catch(error => {
-  console.log(error)
-})
-
-const blog = require('./config/mongodb')
-// let test = new insertBolg({
-//   title: 'yinxiupei',
-//   author: 'me',
-//   content: '你好哇'
-// })
-// test.save().then(res => {
-//   console.log(res)
-// })
-blog.find({_id: '5b4ffd14afd98e520068ccdc'}).then(res => {
-  console.log(res)
-})
 // 错误处理
 const handler = async (ctx, next) => {
   try {
@@ -51,6 +24,6 @@ const handler = async (ctx, next) => {
 // 路由
 // routes
 app.use(routes.routes(), routes.allowedMethods());
-
+app.use(bodyParser())
 // app.use(main)
 app.listen(3000)

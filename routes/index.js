@@ -1,9 +1,8 @@
 var Router = require('koa-router')
-var data = require('./index.json')
+const post = require('./post')
+
 const router = new Router()
 
-router.get('/info', (ctx, next) => {
-  ctx.body = data
-  console.log(ctx)
-})
+router.use(post.routes(), post.allowedMethods())
+
 module.exports = router
