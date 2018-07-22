@@ -4,6 +4,8 @@ const bodyparser = require('koa-bodyparser')
 const app = new koa()
 const fs = require('fs')
 const routes = require('./routes')
+var cors = require('koa-cors')
+app.use(cors)
 // 连接数据库
 const mongoose = require('./config/baseConfig')
 mongoose.connect()
