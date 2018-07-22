@@ -1,4 +1,5 @@
 const { Post } = require('../model')
+const moment = require('moment')
 
 var post = function () {}
 
@@ -27,5 +28,20 @@ post.prototype.read = async function (ctx) {
 }
 
 post.prototype.create = async function (ctx) {
+  let request = ctx.request.query
+  let params = {
+    title: request.title,
+    content: request.content,
+    type: request.type,
+    time: moment(new Date()).format(),
+    author: '南方姑娘'
+  }
+  let res = await Post.create({
+    ...params
+  })
+  ctx.body = {
+    code: 1,
+    msg: res
+  }
 }
 module.exports = new post()

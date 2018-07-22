@@ -3,6 +3,8 @@ const Router = require('koa-router')
 
 const router = new Router()
 
-router.get('/info', post.read)
+router.get('/post/index', post.index)
+router.get('/post/read', post.read)
+router.post('/post/create', post.create)
 
 module.exports = router
