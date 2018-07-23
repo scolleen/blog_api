@@ -4,7 +4,6 @@ const moment = require('moment')
 var post = function () {}
 
 post.prototype.index = async function (ctx) {
-  console.log(ctx)
   let res = await Post.find({})
   ctx.body = {
     code: 1,
@@ -12,9 +11,9 @@ post.prototype.index = async function (ctx) {
   }
 }
 post.prototype.read = async function (ctx) {
-  let id = ctx.request.query.id
+  let id = ctx.request.body.id
   if (id) {
-    let res = await Post.findOne({_id: ctx.request.query.id})
+    let res = await Post.findOne({'_id': id})
     ctx.body = {
       code: 1,
       payload: res
@@ -22,13 +21,13 @@ post.prototype.read = async function (ctx) {
   } else {
     ctx.body = {
       code: 0,
-      msg: 'ID不存在'
+      msg: '文章不存在'
     }
   }
 }
 
 post.prototype.create = async function (ctx) {
-  let request = ctx.request.query
+  let request = ctx.request.body
   let params = {
     title: request.title,
     content: request.content,
@@ -41,7 +40,7 @@ post.prototype.create = async function (ctx) {
   })
   ctx.body = {
     code: 1,
-    msg: res
+    msg: '创建成功'
   }
 }
 module.exports = new post()
