@@ -32,7 +32,7 @@ post.prototype.create = async function (ctx) {
     title: request.title,
     content: request.content,
     type: request.type,
-    time: moment(new Date()).format(),
+    time: new Date(),
     author: '南方姑娘'
   }
   let res = await Post.create({
