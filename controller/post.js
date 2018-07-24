@@ -4,7 +4,7 @@ const moment = require('moment')
 var post = function () {}
 
 post.prototype.index = async function (ctx) {
-  let res = await Post.find({})
+  let res = await Post.find({}).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
     list: res
@@ -32,7 +32,7 @@ post.prototype.create = async function (ctx) {
     title: request.title,
     content: request.content,
     type: request.type,
-    time: new Date(),
+    time: moment().format(),
     author: '南方姑娘'
   }
   let res = await Post.create({
