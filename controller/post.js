@@ -47,7 +47,7 @@ post.prototype.create = async function (ctx) {
 }
 // 时间分组
 post.prototype.get_time = async function (ctx) {
-  let payload = await Post.aggregate([
+  let list = await Post.aggregate([
     {
       $group: {
         _id : { $substr: ["$time", 0, 4] },
@@ -59,16 +59,16 @@ post.prototype.get_time = async function (ctx) {
   ]).sort({ _id: 'desc' })
   ctx.body = {
     code: 1,
-    body: payload
+    time_list: list
   }
 }
 // 模糊查询
 post.prototype.search = async function (ctx) {
   let key = ctx.request.query.key
-  let payload = await Post.find({ "content":{ $regex: key, $options: 'i' } }).sort({ time: 'desc' })
+  let list = await Post.find({ "content":{ $regex: key, $options: 'i' } }).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
-    body: payload
+    body: list
   }
 }
 module.exports = new post()

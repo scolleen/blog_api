@@ -5,9 +5,10 @@ const bodyParser = require('koa-bodyparser')()
 const router = new Router()
 
 router.get('/post/index', post.index)
-router.post('/post/read', bodyParser, post.read)
-router.post('/post/create', bodyParser, post.create)
 router.get('/post/get_time', post.get_time)
 router.get('/post/search', post.search)
+
+router.post('/post/read', bodyParser, post.read)
+router.post('/post/create', bodyParser, post.create)
 
 module.exports = router
