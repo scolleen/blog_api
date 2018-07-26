@@ -2,9 +2,12 @@ const { Post } = require('../model')
 const moment = require('moment')
 
 var post = function () {}
-// 所有文章
+// 所有文章 + 分页功能
 post.prototype.index = async function (ctx) {
-  let res = await Post.find({}).sort({ time: 'desc' })
+  let page = ctx.request.query.page || 2
+  let pageSize = 3
+  let start = (page - 1) * pageSize
+  let res = await Post.find({}).skip(start).limit(pageSize).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
     list: res
