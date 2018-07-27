@@ -2,15 +2,18 @@ const { Post } = require('../model')
 const moment = require('moment')
 
 var post = function () {}
+let pageSize = 4
 // 所有文章 + 分页功能
 post.prototype.index = async function (ctx) {
-  let page = ctx.request.query.page || 2
-  let pageSize = 3
+  let page = parseInt(ctx.request.query.page || 1)
   let start = (page - 1) * pageSize
+  let post = await Post.find({})
   let res = await Post.find({}).skip(start).limit(pageSize).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
-    list: res
+    list: res,
+    current: page,
+    all: Math.ceil(post.length / pageSize)
   }
 }
 // 查看详情
@@ -71,7 +74,7 @@ post.prototype.search = async function (ctx) {
   let list = await Post.find({ "content":{ $regex: key, $options: 'i' } }).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
-    body: list
+    list: list
   }
 }
 module.exports = new post()
