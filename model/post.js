@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 const post = new mongoose.Schema({
   title: {
@@ -10,7 +11,10 @@ const post = new mongoose.Schema({
     type: String,
     required: true
   },
-  time: String,
+  time: {
+    type: String,
+    default: moment().format()
+  },
   type: {
     type: Number,
     required: true

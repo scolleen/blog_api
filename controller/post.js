@@ -1,5 +1,4 @@
 const { Post } = require('../model')
-const moment = require('moment')
 
 var post = function () {}
 let pageSize = 4
@@ -39,7 +38,6 @@ post.prototype.create = async function (ctx) {
     title: request.title,
     content: request.content,
     type: request.type,
-    time: moment().format(),
     author: '南方姑娘'
   }
   let res = await Post.create({
