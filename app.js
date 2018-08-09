@@ -9,7 +9,6 @@ mongoose.connect()
 
 app.use(cors({
   origin: '*',
-  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
   allowMethods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
 }))
@@ -38,5 +37,5 @@ const handler = async (ctx, next) => {
 // routes
 app.use(routes.routes(), routes.allowedMethods())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
-app.use(bodyparser)
+app.use(bodyparser())
 app.listen(3000)

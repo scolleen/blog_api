@@ -14,6 +14,10 @@ const comment = new mongoose.Schema({
   },
   type: Number,
   reply_id: String,
+  arcticle_id: {
+    type: String,
+    default: '0'
+  }
 })
 
 module.exports = mongoose.model('Comment', comment)
