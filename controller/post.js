@@ -40,13 +40,20 @@ post.prototype.create = async function (ctx) {
     type: request.type,
     author: '南方姑娘'
   }
-  let res = await Post.create({
-    ...params
-  })
-  ctx.body = {
-    code: 1,
-    id: res._id,
-    msg: '创建成功'
+  try {
+    let res = await Post.create({
+      ...params
+    })
+    ctx.body = {
+      code: 1,
+      id: res._id,
+      msg: '创建成功'
+    }
+  } catch (error) {
+    ctx.body = {
+      code: 0,
+      msg: '参数不完整'
+    }
   }
 }
 // 时间分组
@@ -69,7 +76,7 @@ post.prototype.get_time = async function (ctx) {
 // 模糊查询
 post.prototype.search = async function (ctx) {
   let key = ctx.request.query.key
-  let list = await Post.find({ "content":{ $regex: key, $options: 'i' } }).sort({ time: 'desc' })
+  let list = await Post.find({ 'content':{ $regex: key, $options: 'i' } }).sort({ time: 'desc' })
   ctx.body = {
     code: 1,
     list: list
