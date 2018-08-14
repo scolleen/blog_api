@@ -25,7 +25,7 @@ const handler = async (ctx, next) => {
   try {
     await next();
   } catch (err) {
-    console.log(erro)
+    console.log(err)
     ctx.response.status = err.statusCode || err.status || 500;
     ctx.response.body = {
       message: err.message
@@ -38,4 +38,5 @@ const handler = async (ctx, next) => {
 app.use(routes.routes(), routes.allowedMethods())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
 app.use(bodyparser())
+app.use(handler())
 app.listen(3000)
