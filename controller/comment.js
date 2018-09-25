@@ -4,11 +4,16 @@ var comment = function () {}
 
 comment.prototype.create = async function (ctx) {
   let request = ctx.request.body
+  /* type 值
+  0 评论
+  1 留言板留言
+  */
   let params = {
     content: request.content,
     name: request.name,
     contact: request.contact,
-    type: request.type,
+    type: request.type ? request.type : 0,
+    arcticle_id: request.arcticle_id,
     reply_id: request.reply_id
   }
   try {

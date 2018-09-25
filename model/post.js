@@ -13,7 +13,7 @@ const post = new mongoose.Schema({
   },
   time: {
     type: String,
-    default: moment().format()
+    default: moment(new Date()).format()
   },
   type: {
     type: Number,
