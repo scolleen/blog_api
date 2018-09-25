@@ -38,5 +38,5 @@ const handler = async (ctx, next) => {
 app.use(routes.routes(), routes.allowedMethods())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
 app.use(bodyparser())
-app.use(handler())
+app.use(handler)
 app.listen(3000)
