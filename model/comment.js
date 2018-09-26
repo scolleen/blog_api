@@ -10,7 +10,7 @@ const comment = new mongoose.Schema({
   contact: String,
   time: {
     type: String,
-    default: moment().format()
+    default: moment(new Date()).format()
   },
   type: Number,
   reply_id: String,
