@@ -4,7 +4,10 @@ const bodyParser = require('koa-bodyparser')()
 
 const router = new Router()
 
-router.get('/comment/read', bodyParser, comment.read)
-router.post('/comment/create', bodyParser, comment.create)
+// 为当前路由设置前缀
+router.prefix('/comment')
+
+router.get('/read', bodyParser, comment.read)
+router.post('/create', bodyParser, comment.create)
 
 module.exports = router
