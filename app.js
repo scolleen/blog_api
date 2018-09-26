@@ -23,7 +23,7 @@ app.use(cors({
 // 错误处理
 const handler = async (ctx, next) => {
   try {
-    await next();
+    await next()
   } catch (err) {
     console.log(err)
     ctx.response.status = err.statusCode || err.status || 500;
@@ -34,9 +34,11 @@ const handler = async (ctx, next) => {
 }
 
 // 路由
+// 为所有路由设置前缀
+routes.prefix('/api')
 // routes
 app.use(routes.routes(), routes.allowedMethods())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
 app.use(bodyparser())
-app.use(handler())
+app.use(handler)
 app.listen(3000)
