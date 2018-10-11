@@ -21,6 +21,7 @@ app.use(cors({
 //   await next()
 // })
 // 错误处理
+console.log('')
 const handler = async (ctx, next) => {
   try {
     await next()
