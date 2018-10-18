@@ -1,6 +1,7 @@
 var Router = require('koa-router')
 const post = require('./post')
 const comment = require('./comment')
+const oauthGithub = require('./oauth/github')
 
 const router = new Router()
 
