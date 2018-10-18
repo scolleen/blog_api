@@ -1,9 +1,7 @@
-var Router = require('koa-router')
+const router = require('koa-router')()
 const post = require('./post')
 const comment = require('./comment')
-const oauthGithub = require('./oauth/github')
-
-const router = new Router()
+const oauth = require('./oauth')
 
 router.get('/', async (ctx, next) => {
   ctx.body = {
@@ -14,5 +12,7 @@ router.get('/', async (ctx, next) => {
 })
 router.use(post.routes(), post.allowedMethods())
 router.use(comment.routes(), comment.allowedMethods())
+// 用户登录授权
+router.use(oauth.routes(), oauth.allowedMethods())
 
 module.exports = router
