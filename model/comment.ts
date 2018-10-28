@@ -20,4 +20,4 @@ const comment = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Comment', comment)
+export default mongoose.model('Comment', comment)

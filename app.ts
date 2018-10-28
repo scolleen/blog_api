@@ -1,11 +1,14 @@
-const koa = require('koa')
-const bodyparser = require('koa-bodyparser')
-const app = new koa()
-const routes = require('./routes')
-const cors = require('koa2-cors')
+import * as koa from 'koa'
+import * as bodyparser from 'koa-bodyparser'
+import * as cors from 'koa2-cors'
+
+import routes from './routes'
+
 // 连接数据库
-const mongoose = require('./config/baseConfig')
-mongoose.connect()
+import mongoose from './config/baseConfig'
+mongoose()
+
+const app = new koa()
 
 app.use(cors({
   origin: '*',
@@ -33,12 +36,14 @@ const handler = async (ctx, next) => {
   }
 }
 
-// 路由
 // 为所有路由设置前缀
 routes.prefix('/api')
+
 // routes
-app.use(routes.routes(), routes.allowedMethods())
+app.use(routes.routes())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
 app.use(bodyparser())
 app.use(handler)
-app.listen(3000)
+app.listen(3001)
+
+export default app

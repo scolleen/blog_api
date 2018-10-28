@@ -1,6 +1,6 @@
-var comment = require('../controller/comment')
-const Router = require('koa-router')
+import * as Router from 'koa-router';
 const bodyParser = require('koa-bodyparser')()
+import comment from '../controller/comment'
 
 const router = new Router()
 
@@ -10,4 +10,4 @@ router.prefix('/comment')
 router.get('/read', bodyParser, comment.read)
 router.post('/create', bodyParser, comment.create)
 
-module.exports = router
+export default router

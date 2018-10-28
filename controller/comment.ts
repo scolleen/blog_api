@@ -1,5 +1,4 @@
-const { Comment } = require('../model')
-
+import { Comment } from '../model'
 var comment = function () {}
 
 comment.prototype.create = async function (ctx) {
@@ -46,4 +45,4 @@ comment.prototype.read = async function (ctx) {
   }
 }
 
-module.exports = new comment()
+export default new comment()

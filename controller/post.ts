@@ -1,4 +1,4 @@
-const { Post } = require('../model')
+import { Post } from "../model"
 
 var post = function () {}
 let pageSize = 4
@@ -82,4 +82,4 @@ post.prototype.search = async function (ctx) {
     list: list
   }
 }
-module.exports = new post()
+export default new post()
