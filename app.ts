@@ -3,7 +3,6 @@ import * as bodyparser from 'koa-bodyparser'
 import * as cors from 'koa2-cors'
 
 import routes from './routes'
-
 // 连接数据库
 import mongoose from './config/baseConfig'
 mongoose()
@@ -44,6 +43,6 @@ app.use(routes.routes())
 // 引入koa-bodyparser 它用于解析客户端请求的body中的内容,内部使用JSON编码处理
 app.use(bodyparser())
 app.use(handler)
-app.listen(3001)
+app.listen(3000)
 
 export default app

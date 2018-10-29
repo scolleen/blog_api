@@ -1,11 +1,12 @@
-const router = require('koa-router')()
-const bodyParser = require('koa-bodyparser')()
-const fetch = require('node-fetch')
+import * as Router from "koa-router";
+import * as fetch from 'node-fetch'
 
-const config = require('../../config/githubConfig')
+import config from '../../config/githubConfig'
+
+const router = new Router()
 
 router.prefix('/user')
-router.get('/login', bodyParser, async (ctx) => {
+router.get('/login', async (ctx) => {
   const type = ctx.query.type
   if (!type) {}
   if (type === 'github') {
@@ -53,4 +54,4 @@ router.get('/oauth/github_callback', async (ctx) => {
     })
 })
 
-module.exports = router
+export default router
