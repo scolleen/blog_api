@@ -1,4 +1,5 @@
 import { Post } from "../model"
+import { BaseContext } from "koa"
 
 var post = function () {}
 let pageSize = 4
@@ -82,4 +83,61 @@ post.prototype.search = async function (ctx) {
     list: list
   }
 }
-export default new post()
+
+class postController {
+  async index(ctx) {
+    let page = parseInt(ctx.request.query.page || 1)
+    let start = (page - 1) * pageSize
+    let post = await Post.find({})
+    let res = await Post.find({}).skip(start).limit(pageSize).sort({ time: 'desc' })
+    ctx.body = {
+      code: 1,
+      list: res,
+      current: page,
+      all: Math.ceil(post.length / pageSize)
+    }
+  }
+  async read(ctx) {
+    let id = ctx.request.body.id
+    if (id) {
+      let res = await Post.findOne({ '_id': id })
+      ctx.body = {
+        code: 1,
+        payload: res
+      }
+    } else {
+      ctx.body = {
+        code: 0,
+        msg: '文章不存在'
+      }
+    }
+  }
+}
+
+export default class PostController {
+                 pageSize: Number = 2;
+                 public static async ReadPost(ctx: BaseContext) {
+                   ctx.body = ctx.Request;
+                   let page: any = parseInt(ctx.query.page || 1);
+                   let start: Number = (page - 1) * pageSize;
+                   let res = await Post.find({})
+                     .skip(start)
+                     .limit(pageSize)
+                     .sort({ time: "desc" });
+                   ctx.body = {
+                     code: 1,
+                     list: res,
+                     current: page,
+                     all: Math.ceil(post.length / pageSize)
+                   }
+                 }
+                 public static async ReadById(ctx: BaseContext) {
+                   let id: String = ctx.body.id;
+                   if (id) {
+                     let res = await Post.findOne({ _id: id });
+                     ctx.body = { code: 1, payload: res };
+                   } else {
+                     ctx.body = { code: 0, msg: "文章不存在" };
+                   }
+                 }
+               }
